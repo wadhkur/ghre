@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ULTRA WOW — Hyper‑Modern Animated Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050711;
+  --bg-2:#0b1020;
+  --fg:#e9f0ff;
+  --muted:#9ab0d0;
+  --brand:#8b5cf6;
+  --accent:#06b6d4;
+  --hot:#f43f5e;
+  --glass:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
+  --radius:18px;
+  --shadow:0 30px 80px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 10% -10%,rgba(139,92,246,.25),transparent),radial-gradient(1200px 600px at 110% 10%,rgba(6,182,212,.25),transparent),var(--bg);color:var(--fg);font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+a{color:var(--accent);text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1200px,92vw);margin:0 auto}
+/* NAV */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(5,7,17,.4);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
+.brand{font-weight:800;letter-spacing:.6px}
+.nav-links a{padding:10px 12px;border-radius:12px;transition:background .2s}
+.nav-links a:hover{background:var(--glass)}
+/* HERO */
+.hero{position:relative;min-height:88svh;display:grid;place-items:center;overflow:hidden}
+#gl{position:absolute;inset:0;z-index:-2}
+.hero-inner{padding:90px 0;text-align:center}
+.badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(139,92,246,.15);color:#c7b8ff;font-size:12px;letter-spacing:.3px}
+h1.hero-title{font-size:clamp(42px,8vw,108px);line-height:1.02;margin:14px 0;background:linear-gradient(135deg,#fff, #c7d2fe 30%, #67e8f9 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,2.2vw,22px);color:var(--muted);max-width:900px;margin:0 auto 24px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:16px;border:1px solid var(--border);cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;box-shadow:var(--shadow)}
+.btn.secondary{background:rgba(255,255,255,.05);color:var(--fg)}
+.btn:hover{transform:translateY(-3px)}
+.magnet{position:relative;isolation:isolate;overflow:hidden}
+.magnet::after{content:"";position:absolute;inset:-20%;background:radial-gradient(600px 200px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.12),transparent 40%);z-index:-1;transition:opacity .2s;opacity:.6}
+/* SECTIONS */
+.section{padding:90px 0}
+.section h2{font-size:clamp(28px,4vw,48px);margin:0 0 12px}
+.lead{color:var(--muted);max-width:840px}
+.grid{display:grid;gap:20px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--border);border-radius:var(--radius);padding:18px;position:relative;overflow:hidden;box-shadow:var(--shadow);transform-style:preserve-3d}
+.card::after{content:"";position:absolute;inset:-1px;border-radius:var(--radius);padding:1px;background:linear-gradient(135deg,rgba(139,92,246,.45),rgba(6,182,212,.3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.card h3{margin:6px 0 6px}
+.card p{margin:0;color:var(--muted)}
+/* MARQUEE */
+.marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.marquee .inner{display:inline-block;padding:14px 0 14px 100%;animation:marquee 28s linear infinite}
+.marquee .inner span{display:inline-flex;align-items:center;gap:10px;margin:0 22px;color:#c9d6ff}
+@keyframes marquee { to { transform:translateX(-100%) } }
+/* GALLERY / PARALLAX */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.tile{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,.04);box-shadow:var(--shadow);transition:transform .2s}
+.tile img{width:100%;height:200px;object-fit:cover;opacity:.92;filter:saturate(1.15) contrast(1.05)}
+.tile .meta{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);padding:8px 10px;border-radius:12px;font-size:12px}
+.tile:hover{transform:translateY(-6px)}
+/* FAQ Accordion */
+.accordion{display:grid;gap:12px}
+.item{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.trigger{width:100%;text-align:left;background:transparent;border:0;color:var(--fg);padding:16px;font-size:16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.content{padding:0 16px 16px;display:none;color:var(--muted)}
+.item.open .content{display:block}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:36px 0 60px;color:var(--muted)}
+/* REVEAL ANIM */
+.reveal{opacity:0;transform:translateY(22px) scale(.98);transition:opacity .7s, transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+/* RESPONSIVE */
+@media (max-width:720px){
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<nav class="top">
+  <div class="container wrap">
+    <div class="brand">ULTRA <span style="color:var(--accent)">WOW</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#showcase">Showcase</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="btn secondary magnet" id="openModal">Get Quote</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner container">
+    <span class="badge reveal">Hyper‑modern • GSAP • WebGL • Parallax</span>
+    <h1 class="hero-title reveal" id="title">Websites that make people say “WOW.”</h1>
+    <p class="hero-sub reveal">Neon glass UI, shader gradients, buttery scroll‑reveals, magnetic buttons, and micro‑interactions — engineered for speed and conversions.</p>
+    <div class="cta">
+      <a class="btn primary magnet reveal" href="#contact">Start Now</a>
+      <a class="btn secondary magnet reveal" href="#features">See Features</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="features" class="section container">
+    <h2 class="reveal">Features that actually matter</h2>
+    <p class="lead reveal">Performance‑first, tasteful animations, and real UX wins. Every motion has a purpose.</p>
+    <div class="grid cards" id="featureGrid">
+      <div class="card reveal">
+        <h3>Blazing Speed #1</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #2</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #3</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #4</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #5</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #6</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #7</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #8</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #9</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #10</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #11</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #12</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #13</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #14</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #15</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #16</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #17</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #18</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #19</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #20</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #21</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #22</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #23</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #24</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #25</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #26</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #27</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #28</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #29</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #30</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #31</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #32</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #33</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #34</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #35</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #36</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #37</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #38</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #39</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #40</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #41</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #42</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Blazing Speed #43</h3>
+        <p>GPU-accelerated transforms, lazy media, instant interactions.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Glass UI #44</h3>
+        <p>Neomorphic glass surfaces with soft shadows and neon edges.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Shader Backgrounds #45</h3>
+        <p>WebGL gradient noise and living textures.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Micro‑interactions #46</h3>
+        <p>Magnetic buttons, parallax cards, and tasteful hovers.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Scroll Magic #47</h3>
+        <p>Reveal animations only when content is in view.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Conversion‑Ready #48</h3>
+        <p>Click‑to‑call, WhatsApp, and tracked CTAs.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="marquee"><div class="inner">
+    <span>Trusted by • Contractors</span><span>Plumbers</span><span>Electricians</span><span>Cleaners</span>
+    <span>Landscapers</span><span>Garages</span><span>Detailers</span><span>Dentists</span><span>Gyms</span>
+  </div></div>
+
+  <section id="showcase" class="section container">
+    <h2 class="reveal">Showcase</h2>
+    <p class="lead reveal">Tilt, parallax, and hover effects — built to impress, not overwhelm.</p>
+    <div class="gallery" id="gallery">
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow1/900/600" alt="Showcase 1" loading="lazy"/>
+        <div class="meta">Project 1</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow2/900/600" alt="Showcase 2" loading="lazy"/>
+        <div class="meta">Project 2</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow3/900/600" alt="Showcase 3" loading="lazy"/>
+        <div class="meta">Project 3</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow4/900/600" alt="Showcase 4" loading="lazy"/>
+        <div class="meta">Project 4</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow5/900/600" alt="Showcase 5" loading="lazy"/>
+        <div class="meta">Project 5</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow6/900/600" alt="Showcase 6" loading="lazy"/>
+        <div class="meta">Project 6</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow7/900/600" alt="Showcase 7" loading="lazy"/>
+        <div class="meta">Project 7</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow8/900/600" alt="Showcase 8" loading="lazy"/>
+        <div class="meta">Project 8</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow9/900/600" alt="Showcase 9" loading="lazy"/>
+        <div class="meta">Project 9</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow10/900/600" alt="Showcase 10" loading="lazy"/>
+        <div class="meta">Project 10</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow11/900/600" alt="Showcase 11" loading="lazy"/>
+        <div class="meta">Project 11</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow12/900/600" alt="Showcase 12" loading="lazy"/>
+        <div class="meta">Project 12</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow13/900/600" alt="Showcase 13" loading="lazy"/>
+        <div class="meta">Project 13</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow14/900/600" alt="Showcase 14" loading="lazy"/>
+        <div class="meta">Project 14</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow15/900/600" alt="Showcase 15" loading="lazy"/>
+        <div class="meta">Project 15</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow16/900/600" alt="Showcase 16" loading="lazy"/>
+        <div class="meta">Project 16</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow17/900/600" alt="Showcase 17" loading="lazy"/>
+        <div class="meta">Project 17</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow18/900/600" alt="Showcase 18" loading="lazy"/>
+        <div class="meta">Project 18</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow19/900/600" alt="Showcase 19" loading="lazy"/>
+        <div class="meta">Project 19</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow20/900/600" alt="Showcase 20" loading="lazy"/>
+        <div class="meta">Project 20</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow21/900/600" alt="Showcase 21" loading="lazy"/>
+        <div class="meta">Project 21</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow22/900/600" alt="Showcase 22" loading="lazy"/>
+        <div class="meta">Project 22</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow23/900/600" alt="Showcase 23" loading="lazy"/>
+        <div class="meta">Project 23</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow24/900/600" alt="Showcase 24" loading="lazy"/>
+        <div class="meta">Project 24</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow25/900/600" alt="Showcase 25" loading="lazy"/>
+        <div class="meta">Project 25</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow26/900/600" alt="Showcase 26" loading="lazy"/>
+        <div class="meta">Project 26</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow27/900/600" alt="Showcase 27" loading="lazy"/>
+        <div class="meta">Project 27</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow28/900/600" alt="Showcase 28" loading="lazy"/>
+        <div class="meta">Project 28</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow29/900/600" alt="Showcase 29" loading="lazy"/>
+        <div class="meta">Project 29</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow30/900/600" alt="Showcase 30" loading="lazy"/>
+        <div class="meta">Project 30</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow31/900/600" alt="Showcase 31" loading="lazy"/>
+        <div class="meta">Project 31</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow32/900/600" alt="Showcase 32" loading="lazy"/>
+        <div class="meta">Project 32</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow33/900/600" alt="Showcase 33" loading="lazy"/>
+        <div class="meta">Project 33</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow34/900/600" alt="Showcase 34" loading="lazy"/>
+        <div class="meta">Project 34</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow35/900/600" alt="Showcase 35" loading="lazy"/>
+        <div class="meta">Project 35</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow36/900/600" alt="Showcase 36" loading="lazy"/>
+        <div class="meta">Project 36</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow37/900/600" alt="Showcase 37" loading="lazy"/>
+        <div class="meta">Project 37</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow38/900/600" alt="Showcase 38" loading="lazy"/>
+        <div class="meta">Project 38</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow39/900/600" alt="Showcase 39" loading="lazy"/>
+        <div class="meta">Project 39</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow40/900/600" alt="Showcase 40" loading="lazy"/>
+        <div class="meta">Project 40</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow41/900/600" alt="Showcase 41" loading="lazy"/>
+        <div class="meta">Project 41</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow42/900/600" alt="Showcase 42" loading="lazy"/>
+        <div class="meta">Project 42</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow43/900/600" alt="Showcase 43" loading="lazy"/>
+        <div class="meta">Project 43</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow44/900/600" alt="Showcase 44" loading="lazy"/>
+        <div class="meta">Project 44</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow45/900/600" alt="Showcase 45" loading="lazy"/>
+        <div class="meta">Project 45</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow46/900/600" alt="Showcase 46" loading="lazy"/>
+        <div class="meta">Project 46</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow47/900/600" alt="Showcase 47" loading="lazy"/>
+        <div class="meta">Project 47</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow48/900/600" alt="Showcase 48" loading="lazy"/>
+        <div class="meta">Project 48</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow49/900/600" alt="Showcase 49" loading="lazy"/>
+        <div class="meta">Project 49</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow50/900/600" alt="Showcase 50" loading="lazy"/>
+        <div class="meta">Project 50</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow51/900/600" alt="Showcase 51" loading="lazy"/>
+        <div class="meta">Project 51</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow52/900/600" alt="Showcase 52" loading="lazy"/>
+        <div class="meta">Project 52</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow53/900/600" alt="Showcase 53" loading="lazy"/>
+        <div class="meta">Project 53</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow54/900/600" alt="Showcase 54" loading="lazy"/>
+        <div class="meta">Project 54</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow55/900/600" alt="Showcase 55" loading="lazy"/>
+        <div class="meta">Project 55</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow56/900/600" alt="Showcase 56" loading="lazy"/>
+        <div class="meta">Project 56</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow57/900/600" alt="Showcase 57" loading="lazy"/>
+        <div class="meta">Project 57</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow58/900/600" alt="Showcase 58" loading="lazy"/>
+        <div class="meta">Project 58</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow59/900/600" alt="Showcase 59" loading="lazy"/>
+        <div class="meta">Project 59</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow60/900/600" alt="Showcase 60" loading="lazy"/>
+        <div class="meta">Project 60</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow61/900/600" alt="Showcase 61" loading="lazy"/>
+        <div class="meta">Project 61</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow62/900/600" alt="Showcase 62" loading="lazy"/>
+        <div class="meta">Project 62</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow63/900/600" alt="Showcase 63" loading="lazy"/>
+        <div class="meta">Project 63</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow64/900/600" alt="Showcase 64" loading="lazy"/>
+        <div class="meta">Project 64</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow65/900/600" alt="Showcase 65" loading="lazy"/>
+        <div class="meta">Project 65</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow66/900/600" alt="Showcase 66" loading="lazy"/>
+        <div class="meta">Project 66</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow67/900/600" alt="Showcase 67" loading="lazy"/>
+        <div class="meta">Project 67</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow68/900/600" alt="Showcase 68" loading="lazy"/>
+        <div class="meta">Project 68</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow69/900/600" alt="Showcase 69" loading="lazy"/>
+        <div class="meta">Project 69</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow70/900/600" alt="Showcase 70" loading="lazy"/>
+        <div class="meta">Project 70</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow71/900/600" alt="Showcase 71" loading="lazy"/>
+        <div class="meta">Project 71</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow72/900/600" alt="Showcase 72" loading="lazy"/>
+        <div class="meta">Project 72</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow73/900/600" alt="Showcase 73" loading="lazy"/>
+        <div class="meta">Project 73</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow74/900/600" alt="Showcase 74" loading="lazy"/>
+        <div class="meta">Project 74</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow75/900/600" alt="Showcase 75" loading="lazy"/>
+        <div class="meta">Project 75</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow76/900/600" alt="Showcase 76" loading="lazy"/>
+        <div class="meta">Project 76</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow77/900/600" alt="Showcase 77" loading="lazy"/>
+        <div class="meta">Project 77</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow78/900/600" alt="Showcase 78" loading="lazy"/>
+        <div class="meta">Project 78</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow79/900/600" alt="Showcase 79" loading="lazy"/>
+        <div class="meta">Project 79</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow80/900/600" alt="Showcase 80" loading="lazy"/>
+        <div class="meta">Project 80</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow81/900/600" alt="Showcase 81" loading="lazy"/>
+        <div class="meta">Project 81</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow82/900/600" alt="Showcase 82" loading="lazy"/>
+        <div class="meta">Project 82</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow83/900/600" alt="Showcase 83" loading="lazy"/>
+        <div class="meta">Project 83</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow84/900/600" alt="Showcase 84" loading="lazy"/>
+        <div class="meta">Project 84</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow85/900/600" alt="Showcase 85" loading="lazy"/>
+        <div class="meta">Project 85</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow86/900/600" alt="Showcase 86" loading="lazy"/>
+        <div class="meta">Project 86</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow87/900/600" alt="Showcase 87" loading="lazy"/>
+        <div class="meta">Project 87</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow88/900/600" alt="Showcase 88" loading="lazy"/>
+        <div class="meta">Project 88</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow89/900/600" alt="Showcase 89" loading="lazy"/>
+        <div class="meta">Project 89</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow90/900/600" alt="Showcase 90" loading="lazy"/>
+        <div class="meta">Project 90</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow91/900/600" alt="Showcase 91" loading="lazy"/>
+        <div class="meta">Project 91</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow92/900/600" alt="Showcase 92" loading="lazy"/>
+        <div class="meta">Project 92</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow93/900/600" alt="Showcase 93" loading="lazy"/>
+        <div class="meta">Project 93</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow94/900/600" alt="Showcase 94" loading="lazy"/>
+        <div class="meta">Project 94</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow95/900/600" alt="Showcase 95" loading="lazy"/>
+        <div class="meta">Project 95</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow96/900/600" alt="Showcase 96" loading="lazy"/>
+        <div class="meta">Project 96</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow97/900/600" alt="Showcase 97" loading="lazy"/>
+        <div class="meta">Project 97</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow98/900/600" alt="Showcase 98" loading="lazy"/>
+        <div class="meta">Project 98</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow99/900/600" alt="Showcase 99" loading="lazy"/>
+        <div class="meta">Project 99</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow100/900/600" alt="Showcase 100" loading="lazy"/>
+        <div class="meta">Project 100</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow101/900/600" alt="Showcase 101" loading="lazy"/>
+        <div class="meta">Project 101</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow102/900/600" alt="Showcase 102" loading="lazy"/>
+        <div class="meta">Project 102</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow103/900/600" alt="Showcase 103" loading="lazy"/>
+        <div class="meta">Project 103</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow104/900/600" alt="Showcase 104" loading="lazy"/>
+        <div class="meta">Project 104</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow105/900/600" alt="Showcase 105" loading="lazy"/>
+        <div class="meta">Project 105</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow106/900/600" alt="Showcase 106" loading="lazy"/>
+        <div class="meta">Project 106</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow107/900/600" alt="Showcase 107" loading="lazy"/>
+        <div class="meta">Project 107</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow108/900/600" alt="Showcase 108" loading="lazy"/>
+        <div class="meta">Project 108</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow109/900/600" alt="Showcase 109" loading="lazy"/>
+        <div class="meta">Project 109</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow110/900/600" alt="Showcase 110" loading="lazy"/>
+        <div class="meta">Project 110</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow111/900/600" alt="Showcase 111" loading="lazy"/>
+        <div class="meta">Project 111</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow112/900/600" alt="Showcase 112" loading="lazy"/>
+        <div class="meta">Project 112</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow113/900/600" alt="Showcase 113" loading="lazy"/>
+        <div class="meta">Project 113</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow114/900/600" alt="Showcase 114" loading="lazy"/>
+        <div class="meta">Project 114</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow115/900/600" alt="Showcase 115" loading="lazy"/>
+        <div class="meta">Project 115</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow116/900/600" alt="Showcase 116" loading="lazy"/>
+        <div class="meta">Project 116</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow117/900/600" alt="Showcase 117" loading="lazy"/>
+        <div class="meta">Project 117</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow118/900/600" alt="Showcase 118" loading="lazy"/>
+        <div class="meta">Project 118</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow119/900/600" alt="Showcase 119" loading="lazy"/>
+        <div class="meta">Project 119</div>
+      </div>
+      <div class="tile reveal">
+        <img src="https://picsum.photos/seed/wow120/900/600" alt="Showcase 120" loading="lazy"/>
+        <div class="meta">Project 120</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq" class="section container">
+    <h2 class="reveal">FAQ</h2>
+    <div class="accordion" id="faqAcc">
+      <div class="item reveal">
+        <button class="trigger"><span>Will animations slow down the site?</span><span>+</span></button>
+        <div class="content">No — animations are GPU‑accelerated and triggered only in view.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can I edit content easily?</span><span>+</span></button>
+        <div class="content">Yes — the layout is modular and section‑based.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Is it mobile friendly?</span><span>+</span></button>
+        <div class="content">Absolutely. It is responsive and tested on small screens.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>What about SEO?</span><span>+</span></button>
+        <div class="content">Semantic structure, proper titles, and fast loads help rankings.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can we add more pages?</span><span>+</span></button>
+        <div class="content">Yes. The system extends cleanly without breaking style or speed.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Will animations slow down the site?</span><span>+</span></button>
+        <div class="content">No — animations are GPU‑accelerated and triggered only in view.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can I edit content easily?</span><span>+</span></button>
+        <div class="content">Yes — the layout is modular and section‑based.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Is it mobile friendly?</span><span>+</span></button>
+        <div class="content">Absolutely. It is responsive and tested on small screens.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>What about SEO?</span><span>+</span></button>
+        <div class="content">Semantic structure, proper titles, and fast loads help rankings.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can we add more pages?</span><span>+</span></button>
+        <div class="content">Yes. The system extends cleanly without breaking style or speed.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Will animations slow down the site?</span><span>+</span></button>
+        <div class="content">No — animations are GPU‑accelerated and triggered only in view.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can I edit content easily?</span><span>+</span></button>
+        <div class="content">Yes — the layout is modular and section‑based.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Is it mobile friendly?</span><span>+</span></button>
+        <div class="content">Absolutely. It is responsive and tested on small screens.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>What about SEO?</span><span>+</span></button>
+        <div class="content">Semantic structure, proper titles, and fast loads help rankings.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can we add more pages?</span><span>+</span></button>
+        <div class="content">Yes. The system extends cleanly without breaking style or speed.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Will animations slow down the site?</span><span>+</span></button>
+        <div class="content">No — animations are GPU‑accelerated and triggered only in view.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can I edit content easily?</span><span>+</span></button>
+        <div class="content">Yes — the layout is modular and section‑based.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Is it mobile friendly?</span><span>+</span></button>
+        <div class="content">Absolutely. It is responsive and tested on small screens.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>What about SEO?</span><span>+</span></button>
+        <div class="content">Semantic structure, proper titles, and fast loads help rankings.</div>
+      </div>
+      <div class="item reveal">
+        <button class="trigger"><span>Can we add more pages?</span><span>+</span></button>
+        <div class="content">Yes. The system extends cleanly without breaking style or speed.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact" class="section container">
+    <h2 class="reveal">Contact</h2>
+    <p class="lead reveal">Tell us about your project. We’ll reply fast.</p>
+    <form id="contactForm" class="reveal" onsubmit="return handleSubmit(event)">
+      <p><input required placeholder="Your Name" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></p>
+      <p><input required type="email" placeholder="Your Email" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></p>
+      <p><textarea required rows="5" placeholder="Your Message" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></textarea></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary magnet">Send</button>
+        <button type="button" class="btn secondary magnet" onclick="whatsapp()">WhatsApp</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="container">
+  <div>© <span id="year"></span> ULTRA WOW — All rights reserved.</div>
+</footer>
+
+<!-- Modal -->
+<div id="modal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6)">
+  <div style="background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:20px;width:min(640px,94vw)">
+    <h3>Get a Quote</h3>
+    <p class="lead">Tell us what you need.</p>
+    <form onsubmit="return handleSubmit(event)">
+      <p><input required placeholder="Your Name" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></p>
+      <p><input required type="email" placeholder="Your Email" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></p>
+      <p><textarea required rows="5" placeholder="Your Message" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0c142a;color:var(--fg)"></textarea></p>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" class="btn secondary magnet" onclick="closeModal()">Cancel</button>
+        <button class="btn primary magnet">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Modal
+const modal = document.getElementById('modal');
+document.getElementById('openModal').addEventListener('click',()=>modal.style.display='flex');
+function closeModal(){ modal.style.display='none'; }
+
+// Form handlers
+function handleSubmit(e){ e.preventDefault(); alert('Thanks! We will reply shortly.'); return false; }
+function whatsapp(){ const m = encodeURIComponent('Hi! I\'m interested in a new site.'); window.open('https://wa.me/447000000000?text='+m,'_blank'); }
+
+// Intersection reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in'); });
+},{threshold:.12, rootMargin:'0px 0px -10% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Magnetic buttons
+document.querySelectorAll('.magnet').forEach(btn=>{
+  btn.addEventListener('mousemove', (e)=>{
+    const r = btn.getBoundingClientRect();
+    const mx = (e.clientX - r.left)/r.width*100;
+    const my = (e.clientY - r.top)/r.height*100;
+    btn.style.setProperty('--mx', mx+'%');
+    btn.style.setProperty('--my', my+'%');
+    btn.style.transform = 'translateY(-3px)';
+  });
+  btn.addEventListener('mouseleave', ()=>{ btn.style.transform=''; });
+});
+
+// Three.js shader background + particles
+try{
+  const canvas = document.getElementById('gl');
+  const renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+  function onResize(){ renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); }
+  addEventListener('resize', onResize); onResize();
+
+  // Shader plane
+  const geo = new THREE.PlaneGeometry(12, 8, 1, 1);
+  const mat = new THREE.ShaderMaterial({
+    uniforms:{ u_time:{value:0.0}, u_a:{value:new THREE.Color(0x8b5cf6)}, u_b:{value:new THREE.Color(0x06b6d4)} },
+    vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`precision highp float; varying vec2 vUv; uniform float u_time; uniform vec3 u_a; uniform vec3 u_b;
+      // iq noise
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453123); }
+      float noise(in vec2 p){ vec2 i=floor(p); vec2 f=fract(p); float a=hash(i); float b=hash(i+vec2(1.,0.)); float c=hash(i+vec2(0.,1.)); float d=hash(i+vec2(1.,1.)); vec2 u=f*f*(3.0-2.0*f); return mix(a,b,u.x)+ (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y; }
+      void main(){
+        vec2 uv = vUv*3.0;
+        float t = u_time*0.05;
+        float n = noise(uv + t) + 0.5*noise(uv*2.0 - t*1.3);
+        vec3 col = mix(u_a, u_b, smoothstep(0.2,0.9,n));
+        gl_FragColor = vec4(col, .55);
+      }`,
+    transparent:true
+  });
+  const plane = new THREE.Mesh(geo, mat);
+  plane.position.z = -2.5;
+  scene.add(plane);
+
+  // Particles
+  const COUNT = 1800;
+  const positions = new Float32Array(COUNT*3);
+  for(let i=0;i<COUNT;i++){ positions[i*3]=(Math.random()-0.5)*20; positions[i*3+1]=(Math.random()-0.5)*10; positions[i*3+2]=(Math.random()-0.5)*20; }
+  const pgeo = new THREE.BufferGeometry();
+  pgeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  const pm = new THREE.PointsMaterial({color:0x8b5cf6, size:0.02, transparent:true, opacity:.85});
+  const pts = new THREE.Points(pgeo, pm);
+  scene.add(pts);
+
+  let t=0;
+  (function animate(){
+    requestAnimationFrame(animate);
+    t+=0.016;
+    mat.uniforms.u_time.value = t*60.0;
+    pts.rotation.y += 0.0018;
+    pts.rotation.x = Math.sin(t*0.3)*0.2;
+    renderer.render(scene, camera);
+  })();
+}catch(err){/* fail gracefully */}
+
+// GSAP ScrollTrigger
+if(window.gsap && window.ScrollTrigger){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.card').forEach((el,i)=>{
+    gsap.fromTo(el,{y:26,opacity:0,rotateX:-6},{y:0,opacity:1,rotateX:0,duration:.7,delay:(i%6)*.05,
+      scrollTrigger:{trigger:el,start:'top 85%'}});
+  });
+  gsap.to('#title',{backgroundPosition:'200% 0',duration:8,repeat:-1,ease:'none'});
+}
+
+// Tilt cards (mouse parallax)
+document.addEventListener('mousemove',(e)=>{
+  document.querySelectorAll('.card').forEach((card)=>{
+    const r=card.getBoundingClientRect();
+    const cx=e.clientX-r.left, cy=e.clientY-r.top;
+    const rx=((cy/r.height)-.5)*-6, ry=((cx/r.width)-.5)*6;
+    card.style.transform = 'perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+  });
+});
+
+// Accordion
+document.getElementById('faqAcc').addEventListener('click',(e)=>{
+  const t=e.target.closest('.trigger'); if(!t) return;
+  const item=t.parentElement; item.classList.toggle('open');
+});
+</script>
+</body>
+</html>
